@@ -530,6 +530,7 @@
   var isChrome = UA && /chrome\/\d+/.test(UA) && !isEdge;
   var isPhantomJS = UA && /phantomjs/.test(UA);
   var isFF = UA && UA.match(/firefox\/(\d+)/);
+  var isPaleMoon = UA && UA.match(/palemoon\/(\d+)/);
 
   // Firefox has a "watch" function on Object.prototype...
   var nativeWatch = ({}).watch;
@@ -6856,7 +6857,7 @@
   // #9446: Firefox <= 53 (in particular, ESR 52) has incorrect Event.timeStamp
   // implementation and does not fire microtasks in between event propagation, so
   // safe to exclude.
-  var useMicrotaskFix = isUsingMicroTask && !(isFF && Number(isFF[1]) <= 53);
+  var useMicrotaskFix = isUsingMicroTask && !(isFF && Number(isFF[1]) <= 53) && !isPaleMoon;
 
   function add$1 (
     name,
